@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class CarStruct : MonoBehaviour
+[System.Serializable]
+public struct CarData
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float Velocity;
+    public float MaxVelocity;
+    public float Acceleration;
 
-    // Update is called once per frame
-    void Update()
+    // Constructor to initialize the car data
+    public CarData(float velocity, float maxVelocity, float acceleration)
     {
-        
+        Velocity = velocity;
+        MaxVelocity = maxVelocity;
+        Acceleration = acceleration;
     }
+    
 }
