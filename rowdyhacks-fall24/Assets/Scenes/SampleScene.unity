@@ -641,7 +641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f4b6258eb7e2bf48aaa517979ca8676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boostMeter: {fileID: 0}
+  boostMeter: {fileID: 551350620}
   gameData: {fileID: 996070484}
   scoreText: {fileID: 686536630}
 --- !u!114 &996070484
