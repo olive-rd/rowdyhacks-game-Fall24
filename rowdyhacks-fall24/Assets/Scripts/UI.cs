@@ -8,17 +8,11 @@ public class UI : MonoBehaviour
     //      --for testing, replace later---
 
     //boost meter
-    public float maxBoostPercent;
-    public Image meter;
-    [SerializeField]
-    public float boostMeter;
-
-    //score
-    [SerializeField]
-    public int score;
+    public Image boostMeter;
 
     //---end testing vars
 
+    public GameData gameData;
 
     public Text scoreText;
 
@@ -30,13 +24,13 @@ public class UI : MonoBehaviour
 
     void UpdateBoostFill()
     {
-        float fillAmount = boostMeter / maxBoostPercent;
-        meter.fillAmount = fillAmount;
+        float fillAmount = gameData.boostPercent / gameData.maxBoostPercent;
+        boostMeter.fillAmount = fillAmount;
     }
 
     void UpdateScore()
     {
-        scoreText.text = "Score " + score;
+        scoreText.text = "Score " + (int)gameData.score;
     }
     
 }
