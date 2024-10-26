@@ -12,5 +12,5 @@ public struct CarData
         MaxVelocity = maxVelocity;
         Acceleration = acceleration;
     }
-    
+
 }

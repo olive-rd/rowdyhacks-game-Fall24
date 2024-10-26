@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 905846279}
   - component: {fileID: 905846278}
   - component: {fileID: 905846277}
+  - component: {fileID: 905846280}
   m_Layer: 0
   m_Name: AI
   m_TagString: Untagged
@@ -148,7 +149,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 905846276}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -165,7 +166,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!212 &905846278
 SpriteRenderer:
@@ -228,12 +229,30 @@ Transform:
   m_GameObject: {fileID: 905846276}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -7.98, y: 2.23, z: 0}
+  m_LocalPosition: {x: -1.61, y: 1.31, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!114 &905846280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 905846276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 902e078377c2a5546ab64f1f7af554ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carData:
+    Velocity: 0
+    MaxVelocity: 0
+    Acceleration: 5
+  playerCarTransform: {fileID: 1202911777}
+  matchedPlayerVelocity: 0
 --- !u!1 &1084457202
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,6 +294,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1202911777}
   - component: {fileID: 1202911776}
+  - component: {fileID: 1202911778}
   m_Layer: 0
   m_Name: PlayerTest
   m_TagString: Player
@@ -343,13 +363,29 @@ Transform:
   m_GameObject: {fileID: 1202911775}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -2.94, y: -0.5, z: 0}
+  m_LocalPosition: {x: 7.44, y: -0.54, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1084457203}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!114 &1202911778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202911775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6c3ab02d2894e84594a2132f30c79fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carData:
+    Velocity: 0
+    MaxVelocity: 8
+    Acceleration: 5
 --- !u!1 &1567741292
 GameObject:
   m_ObjectHideFlags: 0
