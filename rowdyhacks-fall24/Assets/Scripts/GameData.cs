@@ -10,9 +10,18 @@ public class GameData : MonoBehaviour
     //----end testing variables------
 
     public float score;
+
+    //boost data
+    public bool boostActive;
     public float boostPercent;
     public float maxBoostPercent;
 
+
+    private void Start()
+    {
+        score = 0;
+        boostActive = false;
+    }
     private void Update()
     {
         UpdateScore();
@@ -26,7 +35,10 @@ public class GameData : MonoBehaviour
 
     void UpdateBoost()
     {
-        if(boostPercent< maxBoostPercent)
+        //if not boosting, boost bar increases. if boosting, boost bar depletes
+        if(boostPercent< maxBoostPercent && !boostActive)
             boostPercent += (Time.deltaTime * speed) /2;
+        else if(boostActive)
+            boostPercent -= (Time.deltaTime * speed);
     }
 }
