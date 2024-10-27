@@ -408,7 +408,12 @@ MonoBehaviour:
     MaxVelocity: 0
     Acceleration: 0
   spinOut: 0
-  verticalSpeed: 3
+  boosting: 0
+  minBounds: {x: -5, y: -5}
+  maxBounds: {x: 6.5, y: 6.5}
+  verticalSpeed: 10
+  curSpeed: 7
+  maxSpeed: 0
   rb: {fileID: 865396006}
 --- !u!114 &865396011
 MonoBehaviour:
@@ -423,6 +428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameData: {fileID: 1978184225}
+  player: {fileID: 865396005}
   currentBuff: 0
   speedDecrement: 2
 --- !u!1001 &1561724391
@@ -532,11 +538,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1280336044872135903, guid: 94153316d925b304182266c0a46ce827, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.1
+      value: 24.87
       objectReference: {fileID: 0}
     - target: {fileID: 1280336044872135903, guid: 94153316d925b304182266c0a46ce827, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 3.21
       objectReference: {fileID: 0}
     - target: {fileID: 1280336044872135903, guid: 94153316d925b304182266c0a46ce827, type: 3}
       propertyPath: m_LocalPosition.z
@@ -575,9 +581,25 @@ PrefabInstance:
       value: Blank Obstacle (1)
       objectReference: {fileID: 0}
     - target: {fileID: 2841682090079169392, guid: 94153316d925b304182266c0a46ce827, type: 3}
-      propertyPath: obstacle
+      propertyPath: player
       value: 
-      objectReference: {fileID: 11400000, guid: 31c6b00688356d04b955e9681dbd47ce, type: 2}
+      objectReference: {fileID: 865396005}
+    - target: {fileID: 2841682090079169392, guid: 94153316d925b304182266c0a46ce827, type: 3}
+      propertyPath: gameData
+      value: 
+      objectReference: {fileID: 1978184225}
+    - target: {fileID: 2841682090079169392, guid: 94153316d925b304182266c0a46ce827, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 865396011}
+    - target: {fileID: 3599982614504491492, guid: 94153316d925b304182266c0a46ce827, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3599982614504491492, guid: 94153316d925b304182266c0a46ce827, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -641,24 +663,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1280336044872135903, guid: 94153316d925b304182266c0a46ce827, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1280336044872135903, guid: 94153316d925b304182266c0a46ce827, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1280336044872135903, guid: 94153316d925b304182266c0a46ce827, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1280336044872135903, guid: 94153316d925b304182266c0a46ce827, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.929916
+      value: 49.16
       objectReference: {fileID: 0}
     - target: {fileID: 1280336044872135903, guid: 94153316d925b304182266c0a46ce827, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.026625395
+      value: -2.61
       objectReference: {fileID: 0}
     - target: {fileID: 1280336044872135903, guid: 94153316d925b304182266c0a46ce827, type: 3}
       propertyPath: m_LocalPosition.z
@@ -692,21 +702,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1280336044872135903, guid: 94153316d925b304182266c0a46ce827, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1813693626853048946, guid: 94153316d925b304182266c0a46ce827, type: 3}
       propertyPath: m_Name
       value: Blank Obstacle
-      objectReference: {fileID: 0}
-    - target: {fileID: 1813693626853048946, guid: 94153316d925b304182266c0a46ce827, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1813693626853048946, guid: 94153316d925b304182266c0a46ce827, type: 3}
-      propertyPath: m_TagString
-      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 2841682090079169392, guid: 94153316d925b304182266c0a46ce827, type: 3}
       propertyPath: player
@@ -717,11 +715,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1978184225}
     - target: {fileID: 2841682090079169392, guid: 94153316d925b304182266c0a46ce827, type: 3}
-      propertyPath: obstacle
+      propertyPath: playerController
       value: 
-      objectReference: {fileID: 11400000, guid: d90c280258d37e244a9a8089f7397502, type: 2}
-    - target: {fileID: 2872109653999113062, guid: 94153316d925b304182266c0a46ce827, type: 3}
-      propertyPath: m_IsTrigger
+      objectReference: {fileID: 865396011}
+    - target: {fileID: 3599982614504491492, guid: 94153316d925b304182266c0a46ce827, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3599982614504491492, guid: 94153316d925b304182266c0a46ce827, type: 3}
+      propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

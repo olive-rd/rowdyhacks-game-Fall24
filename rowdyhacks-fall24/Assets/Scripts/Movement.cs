@@ -8,9 +8,13 @@ public class Movement : MonoBehaviour
     [SerializeField] public CarData carData = new CarData();
     public bool spinOut = false;
     public bool boosting = false;
+    public Vector2 minBounds = new Vector2(-5f, -5f);
+    public Vector2 maxBounds = new Vector2(6.5f, 6.5f);
 
     //forward speed moved to GameData.cs. To access speed, use gameData.speed :)
-    public float verticalSpeed = 3f;      // Speed for the player-controlled up/down movement
+    public float verticalSpeed = 7f;// Speed for the player-controlled up/down movement
+    public float curSpeed;
+    public float maxSpeed;
 
     public Rigidbody2D rb;
 
@@ -24,6 +28,8 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
+        curSpeed = carData.Velocity;
+        maxSpeed = carData.MaxVelocity;
         if (spinOut == false)
         {
             Vector3 clampedPosition = transform.position;
@@ -45,6 +51,10 @@ public class Movement : MonoBehaviour
             // Get up/down player input and apply vertical movement
             float moveInput = Input.GetAxis("Vertical"); // W/S or Up/Down arrow keys
             rb.velocity = new Vector2(rb.velocity.x, moveInput * verticalSpeed);
+        }
+        else
+        {
+            
         }
         
     }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3353168079929473127}
   m_Layer: 0
   m_Name: Blank Obstacle
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,8 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8710c94645e1b354a80014103da9b8b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacle: {fileID: 0}
+  obstacle: {fileID: 11400000, guid: 31c6b00688356d04b955e9681dbd47ce, type: 2}
   player: {fileID: 0}
+  playerController: {fileID: 0}
   spriteRenderer: {fileID: 0}
   gameData: {fileID: 0}
 --- !u!50 &3599982614504491492

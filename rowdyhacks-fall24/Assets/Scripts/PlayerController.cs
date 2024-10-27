@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public GameData gameData;
+    [SerializeField] public GameObject player;
+    private CarData playerCarData;
+    private Movement playerMovement;
 
     public enum Buff
     {
@@ -15,6 +19,12 @@ public class PlayerController : MonoBehaviour
     public Buff currentBuff = Buff.None;
 
     public float speedDecrement = 2.0f;
+
+    private void Start()
+    {
+        playerCarData = player.GetComponent<CarData>();
+        playerMovement = player.GetComponent<Movement>();
+    }
 
     private void Update()
     {
@@ -40,7 +50,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("start slow");
         ExitCurrent(currentBuff);
         currentBuff = Buff.Slowed;
-        gameData.forwardSpeed /= speedDecrement;
+        playerCarData.Velocity -= (playerCarData.MaxVelocity * .66f);
         StartCoroutine(SlowedCountdown());
     }
     IEnumerator SlowedCountdown()
@@ -55,7 +65,6 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Exit slow");
         currentBuff = Buff.None;
-        gameData.forwardSpeed *= speedDecrement;
     }
     public void StartSpin()
     {
