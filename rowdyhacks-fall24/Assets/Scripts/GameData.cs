@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class GameData : MonoBehaviour
 {
-    //----testing variables, replace later ----
-    public int speed;
-
-    //----end testing variables------
 
     public float score;
     public float forwardSpeed = 5f;      // Speed at which the car moves automatically from left to right
@@ -31,15 +27,15 @@ public class GameData : MonoBehaviour
 
     void UpdateScore()
     {
-        score += Time.deltaTime * speed;
+        score += (int)(forwardSpeed);
     }
 
     void UpdateBoost()
     {
         //if not boosting, boost bar increases. if boosting, boost bar depletes
         if(boostPercent< maxBoostPercent && !boostActive)
-            boostPercent += (Time.deltaTime * speed) /2;
+            boostPercent += (Time.deltaTime * forwardSpeed) /2;
         else if(boostActive)
-            boostPercent -= (Time.deltaTime * speed);
+            boostPercent -= (Time.deltaTime * forwardSpeed);
     }
 }

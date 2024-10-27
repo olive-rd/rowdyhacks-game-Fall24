@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Pothole
   m_EditorClassIdentifier: 
   obstacleType: 0
-  normalSprite: {fileID: 0}
+  normalSprite: {fileID: 21300000, guid: 89ba0fa18e1e35542b9215b7b03c3561, type: 3}
   futureSprite: {fileID: 0}
