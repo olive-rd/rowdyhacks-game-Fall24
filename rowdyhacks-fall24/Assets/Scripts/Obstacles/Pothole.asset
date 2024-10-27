@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0be98ffdebd8e5543b276c6864e9d451, type: 3}
   m_Name: Pothole
   m_EditorClassIdentifier: 
+  obstacleName: Pot hole
   obstacleType: 0
   normalSprite: {fileID: 21300000, guid: 89ba0fa18e1e35542b9215b7b03c3561, type: 3}
   futureSprite: {fileID: 21300000, guid: 89ba0fa18e1e35542b9215b7b03c3561, type: 3}

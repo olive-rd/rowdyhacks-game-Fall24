@@ -11,6 +11,8 @@ public class Obstacle : ScriptableObject
         Spin
     }
 
+    public string obstacleName;
+
     public ObstacleType obstacleType;
     public Sprite normalSprite;
     public Sprite futureSprite;
