@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarMovement : MonoBehaviour
+public class Movement : MonoBehaviour
 {
     public float forwardSpeed = 5f;      // Speed at which the car moves automatically from left to right
     public float verticalSpeed = 3f;      // Speed for the player-controlled up/down movement
