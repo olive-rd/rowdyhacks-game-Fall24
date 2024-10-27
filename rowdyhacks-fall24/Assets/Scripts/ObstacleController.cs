@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ObstacleController : MonoBehaviour
 {
+    //import player object
     public Obstacle obstacle;
 
     //--temp variables for testing---
