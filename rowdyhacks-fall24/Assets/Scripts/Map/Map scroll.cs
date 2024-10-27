@@ -7,10 +7,11 @@ public class Mapscroll : MonoBehaviour
 
     Renderer rend;
 
-    [Range(0f, 2f)]
-    public float scrollSpeed = 0.5f;
+    [Range(0f, 10f)]
+    public float scrollSpeed = 2.0f;
     private float offset;
     private Material mat;
+
 
     public bool xAxis;
     // Start is called before the first frame update
