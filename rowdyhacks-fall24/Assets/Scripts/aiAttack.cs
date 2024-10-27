@@ -6,11 +6,13 @@ public class aiAttack : MonoBehaviour
 {
     
     private Rigidbody2D parentRigidbody;
+    private CPUAI aiCarScript;
 
     void Start()
     {
         // Get the Rigidbody2D of the parent AI car
         parentRigidbody = GetComponentInParent<Rigidbody2D>();
+        aiCarScript = GetComponentInParent<CPUAI>();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -24,10 +26,8 @@ public class aiAttack : MonoBehaviour
             parentRigidbody.AddForce(repulseDirection * parentRigidbody.velocity.magnitude, ForceMode2D.Impulse);
             collision.rigidbody.AddForce(-repulseDirection * collision.rigidbody.velocity.magnitude, ForceMode2D.Impulse);
 
-            // Disable AI movement after colliding with the player
-            parentRigidbody.velocity = Vector2.zero;
+            // Stop and restart the bumper car coroutine
+            aiCarScript.RestartBumperCarCoroutine();
         }
     }
-
-
 }

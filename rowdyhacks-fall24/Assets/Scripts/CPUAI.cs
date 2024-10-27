@@ -8,9 +8,12 @@ public class CPUAI : MonoBehaviour
 {
     public CarData carData;
     private Transform playerCarTransform;
-    private bool matchedPlayerVelocity = false;
+    [SerializeField] private bool matchedPlayerVelocity = false;
     private bool coroutineRunning = false;
     private bool oneTimeNegative = false;
+    private Coroutine bumperCarCoroutine;
+
+
 
     void Start()
     {
@@ -72,21 +75,34 @@ public class CPUAI : MonoBehaviour
                     coroutineRunning = true;
                     StartCoroutine(BumperCarBehavior());
                 }
+                
+            }
+            
+        }
+        else
+        {
+            //de-apply the speed boost to catch up to the player
+            if (oneTimeNegative == false)
+            {
+                carData.MaxVelocity-=5;
+                oneTimeNegative = true;
+            }
+            if (carData.Velocity <= carData.MaxVelocity)
+            {
+                carData.Velocity = playerCarTransform.GetComponent<CarMovement>().carData.Velocity;
             }
         }
-        //de-apply the speed boost to catch up to the player
-        if (oneTimeNegative == false)
-        {
-            carData.MaxVelocity-=5;
-            oneTimeNegative = true;
-        }
-            
-        if (carData.Velocity <= carData.MaxVelocity)
-        {
-            carData.Velocity = playerCarTransform.GetComponent<CarMovement>().carData.Velocity;
-        }
+        
+        transform.Translate(Vector3.right * carData.Velocity * Time.deltaTime, Space.World); // Move in world space along the X axis
+    }
 
-        transform.Translate(Vector3.right * carData.Velocity * Time.deltaTime, Space.Self); // Move in local space
+    public void RestartBumperCarCoroutine()
+    {
+        if (bumperCarCoroutine != null)
+        {
+            StopCoroutine(bumperCarCoroutine);
+        }
+        bumperCarCoroutine = StartCoroutine(BumperCarBehavior());
     }
 
     private IEnumerator BumperCarBehavior()
@@ -97,21 +113,21 @@ public class CPUAI : MonoBehaviour
 
             // Accelerate towards the player car
             float targetY = Random.Range(-4.5f, 4.5f);
-            float direction = targetY > transform.localPosition.y ? 1f : -1f;
+            float direction = targetY > transform.position.y ? 1f : -1f;
 
-            while (Mathf.Abs(transform.localPosition.y - targetY) > 0.1f)
+            while (Mathf.Abs(transform.position.y - targetY) > 0.1f)
             {
-                transform.Translate(Vector3.up * direction * carData.Acceleration * Time.deltaTime, Space.Self);
+                transform.Translate(Vector3.up * direction * carData.Acceleration * Time.deltaTime, Space.World);
                 yield return null;
             }
 
             // Move to the opposite range on the y-axis
-            targetY = transform.localPosition.y > 0 ? -4.5f : 4.5f;
-            direction = targetY > transform.localPosition.y ? 1f : -1f;
+            targetY = transform.position.y > 0 ? -4.5f : 4.5f;
+            direction = targetY > transform.position.y ? 1f : -1f;
 
-            while (Mathf.Abs(transform.localPosition.y - targetY) > 0.1f)
+            while (Mathf.Abs(transform.position.y - targetY) > 0.1f)
             {
-                transform.Translate(Vector3.up * direction * carData.Acceleration * Time.deltaTime, Space.Self);
+                transform.Translate(Vector3.up * direction * carData.Acceleration * Time.deltaTime, Space.World);
                 yield return null;
             }
         }

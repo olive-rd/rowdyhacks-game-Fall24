@@ -17,6 +17,8 @@ public class CarMovement : MonoBehaviour
             }
         }
 
-        transform.Translate(0, -(carData.Velocity * Time.deltaTime), 0); // Move on the x-axis
+        transform.Translate(Vector3.right * carData.Velocity * Time.deltaTime, Space.World); // Move in world space along the X axis
     }
+
+
 }
