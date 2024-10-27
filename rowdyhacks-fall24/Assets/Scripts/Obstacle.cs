@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Obstacle : MonoBehaviour
+[CreateAssetMenu]
+public class Obstacle : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
+    public enum ObstacleType
     {
-        
+        Slow,
+        Spin
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public ObstacleType obstacleType;
+    public Sprite normalSprite;
+    public Sprite futureSprite;
+
 }
