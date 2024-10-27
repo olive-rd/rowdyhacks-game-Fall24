@@ -109,8 +109,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -32.5}
+  m_SizeDelta: {x: 0, y: 85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4521308551737474046
 CanvasRenderer:
@@ -186,7 +186,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 104.33649, y: -200}
+  m_AnchoredPosition: {x: 104.33649, y: -237}
   m_SizeDelta: {x: 475, y: 570}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5216464034474501039
@@ -261,7 +261,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -241.4436, y: -200}
+  m_AnchoredPosition: {x: -241.4436, y: -237}
   m_SizeDelta: {x: 220, y: 56}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8026870662474589528
@@ -443,6 +443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   score: 0
+  forwardSpeed: 5
   boostActive: 0
   boostPercent: 0
   maxBoostPercent: 100

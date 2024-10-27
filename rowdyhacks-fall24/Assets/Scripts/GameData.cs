@@ -10,6 +10,7 @@ public class GameData : MonoBehaviour
     //----end testing variables------
 
     public float score;
+    public float forwardSpeed = 5f;      // Speed at which the car moves automatically from left to right
 
     //boost data
     public bool boostActive;
