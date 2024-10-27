@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObstacleController : MonoBehaviour
 {
-    public Object obstacle;
+    public Obstacle obstacle;
 
     //--temp variables for testing---
     public int speed = 10;
@@ -22,14 +22,14 @@ public class ObstacleController : MonoBehaviour
 
     }
     void HitObstacle()
-    {/*
-        switch (obstacle.type)
+    {
+        switch (obstacle.obstacleType)
         {
-            case ObstacleType.Slow:
+            case Obstacle.ObstacleType.Slow:
                 break;
-            case ObstacleType.Spin:
+            case Obstacle.ObstacleType.Spin:
                 break;
-        }*/
+        }
     }
 
     void HitObstacleDeath()

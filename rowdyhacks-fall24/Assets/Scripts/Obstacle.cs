@@ -7,12 +7,11 @@ public class Obstacle : ScriptableObject
 {
     public enum ObstacleType
     {
-        slow,
-        spin
+        Slow,
+        Spin
     }
 
     public ObstacleType obstacleType;
-    public SpriteRenderer spriteRenderer;
     public Sprite normalSprite;
     public Sprite futureSprite;
 
