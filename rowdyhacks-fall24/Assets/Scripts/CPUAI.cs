@@ -9,10 +9,7 @@ public class CPUAI : MonoBehaviour
     public CarData carData;
     private Transform playerCarTransform;
     [SerializeField] private bool matchedPlayerVelocity = false;
-    private bool coroutineRunning = false;
     private bool oneTimeNegative = false;
-    private Coroutine bumperCarCoroutine;
-
 
 
     void Start()
@@ -48,7 +45,7 @@ public class CPUAI : MonoBehaviour
         if (playerCarTransform == null) return;
 
         // Check if the AI car is 100 units less than or more than the player car's x-position
-        if (Mathf.Abs(transform.position.x - playerCarTransform.position.x) >= 100)
+        if (Mathf.Abs(transform.position.x - playerCarTransform.position.x) >= 25)
         {
             Destroy(gameObject);
             return;
@@ -69,67 +66,27 @@ public class CPUAI : MonoBehaviour
                 matchedPlayerVelocity = true;
                 carData.Velocity = playerCarTransform.GetComponent<CarMovement>().carData.Velocity;
 
-                // Start the coroutine once the AI car is level with the player car
-                if (!coroutineRunning)
-                {
-                    coroutineRunning = true;
-                    StartCoroutine(BumperCarBehavior());
-                }
-                
             }
-            
+
         }
         else
         {
             //de-apply the speed boost to catch up to the player
             if (oneTimeNegative == false)
             {
-                carData.MaxVelocity-=5;
+                carData.MaxVelocity -= 5;
                 oneTimeNegative = true;
             }
+
             if (carData.Velocity <= carData.MaxVelocity)
             {
                 carData.Velocity = playerCarTransform.GetComponent<CarMovement>().carData.Velocity;
             }
         }
-        
-        transform.Translate(Vector3.right * carData.Velocity * Time.deltaTime, Space.World); // Move in world space along the X axis
+
+        transform.Translate(Vector3.right * carData.Velocity * Time.deltaTime,
+            Space.World); // Move in world space along the X axis
     }
 
-    public void RestartBumperCarCoroutine()
-    {
-        if (bumperCarCoroutine != null)
-        {
-            StopCoroutine(bumperCarCoroutine);
-        }
-        bumperCarCoroutine = StartCoroutine(BumperCarBehavior());
-    }
 
-    private IEnumerator BumperCarBehavior()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(Random.Range(4f, 8f));
-
-            // Accelerate towards the player car
-            float targetY = Random.Range(-4.5f, 4.5f);
-            float direction = targetY > transform.position.y ? 1f : -1f;
-
-            while (Mathf.Abs(transform.position.y - targetY) > 0.1f)
-            {
-                transform.Translate(Vector3.up * direction * carData.Acceleration * Time.deltaTime, Space.World);
-                yield return null;
-            }
-
-            // Move to the opposite range on the y-axis
-            targetY = transform.position.y > 0 ? -4.5f : 4.5f;
-            direction = targetY > transform.position.y ? 1f : -1f;
-
-            while (Mathf.Abs(transform.position.y - targetY) > 0.1f)
-            {
-                transform.Translate(Vector3.up * direction * carData.Acceleration * Time.deltaTime, Space.World);
-                yield return null;
-            }
-        }
-    }
 }

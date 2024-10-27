@@ -7,7 +7,6 @@ public class GameData : MonoBehaviour
 
     public float score;
     public float forwardSpeed = 5f;      // Speed at which the car moves automatically from left to right
-
     //boost data
     public bool boostActive;
     public float boostPercent;
@@ -27,7 +26,7 @@ public class GameData : MonoBehaviour
 
     void UpdateScore()
     {
-        score += (int)(forwardSpeed);
+        score += (forwardSpeed);
     }
 
     void UpdateBoost()

@@ -27,7 +27,6 @@ public class aiAttack : MonoBehaviour
             collision.rigidbody.AddForce(-repulseDirection * collision.rigidbody.velocity.magnitude, ForceMode2D.Impulse);
 
             // Stop and restart the bumper car coroutine
-            aiCarScript.RestartBumperCarCoroutine();
         }
     }
 }

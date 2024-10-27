@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObstacleController : MonoBehaviour
 {
     public Obstacle obstacle;
-    public GameObject player;
+    [SerializeField]public GameObject player;
     public PlayerController playerController;
 
     public SpriteRenderer spriteRenderer;
@@ -21,8 +21,7 @@ public class ObstacleController : MonoBehaviour
     {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         SetSprite();
-
-        player = GameObject.FindGameObjectWithTag("Player");
+        
         playerController = player.GetComponent<PlayerController>();
 
         gameData = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>();
