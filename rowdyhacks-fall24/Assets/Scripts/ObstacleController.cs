@@ -4,33 +4,50 @@ using UnityEngine;
 
 public class ObstacleController : MonoBehaviour
 {
-    //import player object
     public Obstacle obstacle;
+    public GameObject player;
+    public PlayerController playerController;
 
-    //--temp variables for testing---
-    public int speed = 10;
+    public SpriteRenderer spriteRenderer;
 
-    //---end temp variables ---
+    public GameData gameData;
 
-    //public GameData gameData;
-
-    void OnCollisionEnter2D()
+    private void Start()
     {
-        if (speed > 5)
-            HitObstacleDeath();
-        else
-            HitObstacle();
+        StartObstacle();
+    }
 
+    void StartObstacle()
+    {
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = obstacle.normalSprite;
+
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerController = player.GetComponent<PlayerController>();
+
+        gameData = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == ("Player"))
+        {
+            Debug.Log("hit");
+            if (gameData.forwardSpeed > 5)
+                HitObstacleDeath();
+            else
+                HitObstacle();
+        }
     }
     void HitObstacle()
     {
         switch (obstacle.obstacleType)
         {
             case Obstacle.ObstacleType.Slow:
-                Slow();
+                playerController.StartSlowed();
                 break;
             case Obstacle.ObstacleType.Spin:
-                Spin();
+                playerController.StartSpin();
                 break;
         }
     }
@@ -38,14 +55,5 @@ public class ObstacleController : MonoBehaviour
     void HitObstacleDeath()
     {
         Debug.Log("Death");
-    }
-
-    void Slow()
-    {
-        Debug.Log("Slowed down");
-    }
-    void Spin()
-    {
-        Debug.Log("Spin out");
     }
 }
