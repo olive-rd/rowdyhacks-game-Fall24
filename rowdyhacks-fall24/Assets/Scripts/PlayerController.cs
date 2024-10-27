@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerController : MonoBehaviour
 {
     public GameData gameData;
@@ -22,14 +23,16 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        playerCarData = player.GetComponent<CarData>();
         playerMovement = player.GetComponent<Movement>();
     }
 
     private void Update()
     {
         if (currentBuff == Buff.Spinning)
+        {
             UpdateSpin();
+        }
+            
     }
 
     void ExitCurrent(Buff buff)
@@ -69,6 +72,7 @@ public class PlayerController : MonoBehaviour
     public void StartSpin()
     {
         ExitCurrent(currentBuff);
+        playerMovement.spinOut = true;
         currentBuff = Buff.Spinning;
         gameData.forwardSpeed /= speedDecrement;
     }
@@ -83,6 +87,7 @@ public class PlayerController : MonoBehaviour
     }
     public void ExitSpin()
     {
+        playerMovement.spinOut = false;
         currentBuff = Buff.None;
         gameData.forwardSpeed *= speedDecrement;
         transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, 90);

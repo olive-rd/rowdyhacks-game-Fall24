@@ -1,34 +1,43 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
+using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
 public class ObstacleController : MonoBehaviour
 {
     public Obstacle obstacle;
-    [SerializeField]public GameObject player;
-    public PlayerController playerController;
-
+    private GameObject player;
+    private PlayerController playerController;
     public SpriteRenderer spriteRenderer;
-
+    private Transform playerCarTransform;
     public GameData gameData;
-    private CarData playerCarData;
     private Movement movement;
     private void Start()
     {
         StartObstacle();
-        playerCarData = player.GetComponent<CarData>();
         movement = player.GetComponent<Movement>();
+        playerCarTransform = player.transform;
     }
-    
+
+    private void Update()
+    {
+        if (playerCarTransform == null) return;
+        if (Mathf.Abs(transform.position.x - playerCarTransform.position.x) >= 200)
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
 
     void StartObstacle()
     {
+        player = GameObject.FindWithTag("Player");
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         SetSprite();
         movement = player.GetComponent<Movement>();
         playerController = player.GetComponent<PlayerController>();
-        playerCarData = player.GetComponent<CarData>();
         gameData = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>();
     }
 
@@ -67,6 +76,7 @@ public class ObstacleController : MonoBehaviour
                 break;
             case Obstacle.ObstacleType.Spin:
                 playerController.StartSpin();
+                Destroy(this.gameObject);
                 break;
         }
     }
