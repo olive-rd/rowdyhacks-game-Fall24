@@ -26,8 +26,10 @@ public class ObstacleController : MonoBehaviour
         switch (obstacle.obstacleType)
         {
             case Obstacle.ObstacleType.Slow:
+                Slow();
                 break;
             case Obstacle.ObstacleType.Spin:
+                Spin();
                 break;
         }
     }
