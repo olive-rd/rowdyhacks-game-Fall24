@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0be98ffdebd8e5543b276c6864e9d451, type: 3}
-  m_Name: OilSpill
+  m_Name: Cone
   m_EditorClassIdentifier: 
-  obstacleName: Oil Spill
-  obstacleType: 1
-  normalSprite: {fileID: 21300000, guid: 85690609fa3ede24a808ca3df0dacf24, type: 3}
-  futureSprite: {fileID: 21300000, guid: 55ff3a0729c279b4c9e1df949b0111f6, type: 3}
+  obstacleName: Cone
+  obstacleType: 0
+  normalSprite: {fileID: -3749290141874276362, guid: ff00e293f6b4e0d449506763a5ade4b6, type: 3}
+  futureSprite: {fileID: 5417206672373610290, guid: ff00e293f6b4e0d449506763a5ade4b6, type: 3}
