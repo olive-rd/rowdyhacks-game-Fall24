@@ -17,9 +17,9 @@ public class BoostMode : MonoBehaviour
     void StartBoost()
     {
         gameData.boostActive = true;
+        gameData.forwardSpeed *= 2;
         Debug.Log("Boost!");
         //change pngs or something
-        //change speed
     }
     void UpdateBoost()
     {
@@ -29,5 +29,8 @@ public class BoostMode : MonoBehaviour
     void ExitBoost()
     {
         gameData.boostActive = false;
+        gameData.forwardSpeed /= 2;
+
+        //change pngs back
     }
 }

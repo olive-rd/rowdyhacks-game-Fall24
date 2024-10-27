@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacleType: 1
   normalSprite: {fileID: 21300000, guid: 85690609fa3ede24a808ca3df0dacf24, type: 3}
-  futureSprite: {fileID: 0}
+  futureSprite: {fileID: 21300000, guid: 55ff3a0729c279b4c9e1df949b0111f6, type: 3}

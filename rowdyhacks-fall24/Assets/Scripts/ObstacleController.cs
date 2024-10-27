@@ -20,12 +20,20 @@ public class ObstacleController : MonoBehaviour
     void StartObstacle()
     {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = obstacle.normalSprite;
+        SetSprite();
 
         player = GameObject.FindGameObjectWithTag("Player");
         playerController = player.GetComponent<PlayerController>();
 
         gameData = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameData>();
+    }
+
+    void SetSprite()
+    {
+        if(gameData.boostActive)
+            spriteRenderer.sprite = obstacle.futureSprite;
+        else
+            spriteRenderer.sprite = obstacle.normalSprite;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

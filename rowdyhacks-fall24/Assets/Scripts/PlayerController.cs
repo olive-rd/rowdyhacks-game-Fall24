@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
         if (currentBuff == Buff.Spinning)
             UpdateSpin();
     }
+
     void ExitCurrent(Buff buff)
     {
         switch (buff)
