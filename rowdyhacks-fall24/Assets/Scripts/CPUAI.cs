@@ -9,32 +9,33 @@ public class CPUAI : MonoBehaviour
     public CarData carData;
     private Transform playerCarTransform;
     [SerializeField] private bool matchedPlayerVelocity = false;
-    private bool coroutineRunning = false;
     private bool oneTimeNegative = false;
     private Coroutine bumperCarCoroutine;
-
-
+    public Vector2 minBounds = new Vector2(-7f, -7f);
+    public Vector2 maxBounds = new Vector2(7f, 7f);
+    public float bumpForce = 10f;
+    private Rigidbody2D rb;
 
     void Start()
     {
-        // Find the player car GameObject by tag
+        rb = GetComponent<Rigidbody2D>();
         GameObject playerCarGameObject = GameObject.FindGameObjectWithTag("Player");
         if (playerCarGameObject != null)
         {
+            Debug.Log("player found");
             playerCarTransform = playerCarGameObject.transform;
-            var playerCar = playerCarGameObject.GetComponent<CarMovement>();
+            var playerCar = playerCarGameObject.GetComponent<Movement>();
 
-            // Match the AI car's velocity with the player's velocity at spawn
-            if (playerCar.carData.Velocity > playerCar.carData.MaxVelocity)
-            {
+            //Match the AI car's velocity with the player's velocity at spawn
+            //if (playerCar.carData.Velocity > playerCar.carData.MaxVelocity)
+            //{
                 carData.Velocity = playerCar.carData.MaxVelocity;
-            }
-            else
-            {
-                carData.Velocity = playerCar.carData.Velocity;
-            }
-
-            // Ensure AI car always has a higher max velocity than the player
+            //}
+            //else
+            //{
+            //    carData.Velocity = playerCar.carData.Velocity;
+            //}
+            //Ensure AI car always has a higher max velocity than the player
             carData.MaxVelocity = playerCar.carData.MaxVelocity + 5.0f;
         }
         else
@@ -45,15 +46,20 @@ public class CPUAI : MonoBehaviour
 
     void Update()
     {
+        Vector3 clampedPosition = transform.position;
+        clampedPosition.y = Mathf.Clamp(clampedPosition.y, minBounds.y, maxBounds.y);
+
+        //Set the position back to the clamped position
+        transform.position = clampedPosition;
         if (playerCarTransform == null) return;
 
         // Check if the AI car is 100 units less than or more than the player car's x-position
-        if (Mathf.Abs(transform.position.x - playerCarTransform.position.x) >= 100)
+        if (Mathf.Abs(transform.position.x - playerCarTransform.position.x) >= 25)
         {
             Destroy(gameObject);
             return;
         }
-
+        
         if (!matchedPlayerVelocity)
         {
             if (transform.position.x < playerCarTransform.position.x)
@@ -67,17 +73,8 @@ public class CPUAI : MonoBehaviour
             else
             {
                 matchedPlayerVelocity = true;
-                carData.Velocity = playerCarTransform.GetComponent<CarMovement>().carData.Velocity;
-
-                // Start the coroutine once the AI car is level with the player car
-                if (!coroutineRunning)
-                {
-                    coroutineRunning = true;
-                    StartCoroutine(BumperCarBehavior());
-                }
-                
+                carData.Velocity = playerCarTransform.GetComponent<Movement>().carData.Velocity;
             }
-            
         }
         else
         {
@@ -89,47 +86,20 @@ public class CPUAI : MonoBehaviour
             }
             if (carData.Velocity <= carData.MaxVelocity)
             {
-                carData.Velocity = playerCarTransform.GetComponent<CarMovement>().carData.Velocity;
+                carData.Velocity = playerCarTransform.GetComponent<Movement>().carData.Velocity;
             }
         }
         
-        transform.Translate(Vector3.right * carData.Velocity * Time.deltaTime, Space.World); // Move in world space along the X axis
+        transform.Translate(Vector3.right * (carData.Velocity * Time.deltaTime), Space.World); // Move in world space along the X axis
     }
-
-    public void RestartBumperCarCoroutine()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (bumperCarCoroutine != null)
+        if (collision.rigidbody != null)
         {
-            StopCoroutine(bumperCarCoroutine);
-        }
-        bumperCarCoroutine = StartCoroutine(BumperCarBehavior());
-    }
-
-    private IEnumerator BumperCarBehavior()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(Random.Range(4f, 8f));
-
-            // Accelerate towards the player car
-            float targetY = Random.Range(-4.5f, 4.5f);
-            float direction = targetY > transform.position.y ? 1f : -1f;
-
-            while (Mathf.Abs(transform.position.y - targetY) > 0.1f)
-            {
-                transform.Translate(Vector3.up * direction * carData.Acceleration * Time.deltaTime, Space.World);
-                yield return null;
-            }
-
-            // Move to the opposite range on the y-axis
-            targetY = transform.position.y > 0 ? -4.5f : 4.5f;
-            direction = targetY > transform.position.y ? 1f : -1f;
-
-            while (Mathf.Abs(transform.position.y - targetY) > 0.1f)
-            {
-                transform.Translate(Vector3.up * direction * carData.Acceleration * Time.deltaTime, Space.World);
-                yield return null;
-            }
+            Vector2 bounceDirection = collision.contacts[0].normal;
+            rb.AddForce(bounceDirection * bumpForce, ForceMode2D.Impulse);
+            collision.rigidbody.AddForce(-bounceDirection * bumpForce, ForceMode2D.Impulse);
         }
     }
+    
 }
