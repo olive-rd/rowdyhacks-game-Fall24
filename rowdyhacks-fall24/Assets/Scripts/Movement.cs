@@ -7,6 +7,7 @@ public class Movement : MonoBehaviour
     public GameData gameData;
     [SerializeField] public CarData carData = new CarData();
     public bool spinOut = false;
+    public bool boosting = false;
 
     //forward speed moved to GameData.cs. To access speed, use gameData.speed :)
     public float verticalSpeed = 3f;      // Speed for the player-controlled up/down movement
@@ -25,6 +26,18 @@ public class Movement : MonoBehaviour
     {
         if (spinOut == false)
         {
+            Vector3 clampedPosition = transform.position;
+            clampedPosition.y = Mathf.Clamp(clampedPosition.y, minBounds.y, maxBounds.y);
+
+            //Set the position back to the clamped position
+            transform.position = clampedPosition;
+        
+            // Automatically move forward (rightward in a side-scrolling view)
+            carData.Velocity += carData.Acceleration * Time.deltaTime;
+            if ((carData.Velocity > carData.MaxVelocity) && !boosting)
+            {
+                carData.Velocity = carData.MaxVelocity;
+            }
             // Automatically move forward (rightward in a side-scrolling view)
             transform.Translate(Vector3.right * carData.Velocity * Time.deltaTime,
                 Space.World);
